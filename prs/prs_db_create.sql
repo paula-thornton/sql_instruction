@@ -3,6 +3,7 @@ create database prs;
 use prs;
 
 -- DDL - Create Tables
+DROP TABLE IF EXISTS user;
 CREATE TABLE user (
 	ID				INT	PRIMARY KEY AUTO_INCREMENT,
 	UserName		VARCHAR(20)	 		NOT NULL,
@@ -11,11 +12,12 @@ CREATE TABLE user (
 	LastName		VARCHAR(20)			NOT NULL,
 	PhoneNumber		VARCHAR(12)			NOT NULL,
 	Email			VARCHAR(75)			NOT NULL,
-	IsReviewer		TinyInt(1)			NOT NULL,
-	IsAdmin			TinyInt(1)			NOT NULL,
+	IsReviewer		TinyInt(1)			DEFAULT 1 NOT NULL,
+	IsAdmin			TinyInt(1)			DEFAULT 1 NOT NULL,
     CONSTRAINT uname UNIQUE (Username)
 );
 
+DROP TABLE IF EXISTS vendor;
 CREATE TABLE vendor (
 	ID				INT PRIMARY KEY AUTO_INCREMENT,
 	Code			VARCHAR(10)			NOT NULL,
@@ -29,6 +31,7 @@ CREATE TABLE vendor (
     CONSTRAINT vcode UNIQUE (Code) 
 );
 
+DROP TABLE IF EXISTS request;
 CREATE TABLE request (
 	ID					INT	PRIMARY KEY AUTO_INCREMENT,
 	UserID				INT				NOT NULL,
@@ -36,13 +39,14 @@ CREATE TABLE request (
 	Justification		VARCHAR(255)	NOT NULL,
 	DateNeeded			DATE			NOT NULL,
 	DeliveryMode		VARCHAR(25)		NOT NULL,
-	Status				VARCHAR(20)		NOT NULL,
+	Status				VARCHAR(20)		DEFAULT "NEW" NOT NULL,
 	Total				DECIMAL(10,2)	NOT NULL,
 	SubmittedDate		DATETIME		NOT NULL,
 	ReasonForRejection	VARCHAR(100),
     FOREIGN KEY (UserID) REFERENCES user(ID)
 );
 
+DROP TABLE IF EXISTS product;
 CREATE TABLE product (
 	ID					INT PRIMARY KEY AUTO_INCREMENT,
 	VendorID			INT				NOT NULL,
@@ -60,14 +64,14 @@ CREATE TABLE lineitem (
 	RequestID			INT				NOT NULL,
     ProductID			INT				NOT NULL,
 	Quantity			INT				NOT NULL,
-    CONSTRAINT req_pdt UNIQUE (RequestID, ProductID),
+    stuffystuffystuffyCONSTRAINT req_pdt UNIQUE (RequestID, ProductID),
     FOREIGN KEY (ProductID) REFERENCES product(ID),
     FOREIGN KEY (RequestID) REFERENCES request(ID)
 );
 
-DROP USER IF EXISTS prs_db_user@localhost;
-CREATE USER prs_db_user@localhost IDENTIFIED BY 'sesame';
-GRANT SELECT, INSERT, DELETE, UPDATE ON prs.* TO prs_db_user@localhost;
+DROP USER IF EXISTS prs_user@localhost;
+CREATE USER prs_user@localhost IDENTIFIED BY 'sesame';
+GRANT SELECT, INSERT, DELETE, UPDATE ON prs.* TO prs_user@localhost;
 
 insert into user values 
 	(1, 'ab123', 'secret', 'Adam', 'Barrett','513-123-4567','AdamBarrett@gmail.com',0,0);
@@ -86,5 +90,7 @@ insert into product values
 	(1, 1, 'LglPad123', 'Legal Pad', 1.99, NULL, NULL);
 insert into product values
 	(2, 2, 'OfcChr123', 'Black Chair', 199.99, '1 each', NULL);
+    
+
 
     

@@ -21,10 +21,6 @@ create table movie (
     constraint utitle unique (title, year)
 );
 
-insert into movie values (1,'Top Gun','PG',1986,'Tony Scott');
-insert into movie values (2,'Forest Gump','PG-13',1994,'Robert Zemeckis');
-insert into movie values (3,'Sleepless in Seattle','PG',1993,'Nora Ephron'); 
-
 create table actor (
 	id			int				primary key auto_increment,
     firstName	varchar(25)		not null,
@@ -33,14 +29,6 @@ create table actor (
     birthDate	date			not null,
     constraint unq_actor unique (firstName, lastName, birthDate)
 );
-
-insert into actor values (1,'Tom','Hanks','Male','1956-07-09');
-insert into actor values (2,'Robin','Wright','Female','1966-04-08');
-insert into actor values (3,'Gary','Sinise','Female','1955-03-17');
-insert into actor values (4,'Meg','Ryan','Female','1961-11-19');
-insert into actor values (5,'Bill','Pullman','Male','1953-12-17');
-insert into actor values (6,'Tom','Cruise','Male','1962-07-03');
-insert into actor values (7,'Kelly','McGillis','Female','1957-07-09');
 
 create table credit (
 	id			int				primary key auto_increment,
@@ -51,6 +39,18 @@ create table credit (
     FOREIGN KEY (actorID) REFERENCES actor(id),
     constraint act_mov unique (actorID, movieID)
 );
+
+insert into movie values (1,'Top Gun','PG',1986,'Tony Scott');
+insert into movie values (2,'Forest Gump','PG-13',1994,'Robert Zemeckis');
+insert into movie values (3,'Sleepless in Seattle','PG',1993,'Nora Ephron'); 
+
+insert into actor values (1,'Tom','Hanks','Male','1956-07-09');
+insert into actor values (2,'Robin','Wright','Female','1966-04-08');
+insert into actor values (3,'Gary','Sinise','Female','1955-03-17');
+insert into actor values (4,'Meg','Ryan','Female','1961-11-19');
+insert into actor values (5,'Bill','Pullman','Male','1953-12-17');
+insert into actor values (6,'Tom','Cruise','Male','1962-07-03');
+insert into actor values (7,'Kelly','McGillis','Female','1957-07-09');
 
 insert into credit values (0, 1, 6, 'Maverick');
 insert into credit values (0, 1, 7, 'Charlie');
