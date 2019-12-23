@@ -4,4 +4,4 @@ insert into stuffy values
 select * from stuffy;
 update stuffy set type = 'dummy2' where type = 'dummy';
 update stuffy set size = 'XS' where type = 'dummy';
-delete from stuffy where id = 11;
+delete from stuffy where id = 17;

@@ -64,7 +64,7 @@ CREATE TABLE lineitem (
 	RequestID			INT				NOT NULL,
     ProductID			INT				NOT NULL,
 	Quantity			INT				NOT NULL,
-    stuffystuffystuffyCONSTRAINT req_pdt UNIQUE (RequestID, ProductID),
+    CONSTRAINT req_pdt UNIQUE (RequestID, ProductID),
     FOREIGN KEY (ProductID) REFERENCES product(ID),
     FOREIGN KEY (RequestID) REFERENCES request(ID)
 );

@@ -1,0 +1,11 @@
+select * from vendor;
+select * from user;
+select * from product;
+update product set unit = 'Each' where unit is null;
+select * from request;
+select * from lineitem where RequestID = 6;
+select * from lineitem;
+insert into lineitem values (0, 3, 5, 2);
+update request set reasonforrejection ="";
+update request set status = "Review" where status = "Approved";
+update user set isAdmin = '0' where id = 14;

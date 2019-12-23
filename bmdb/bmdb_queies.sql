@@ -97,7 +97,7 @@ select m.title, a.firstName, a.lastName
    right join actor a on c.actorID = a.id
     order by 1,2;
     
-select a.firstName, a.lastName, m.title
+select a.firstName, a.lastName, m.title, c.role
 	from actor a
 	left join credit c on c.actorID = a.id
     left join movie m on c.movieID = m.id
